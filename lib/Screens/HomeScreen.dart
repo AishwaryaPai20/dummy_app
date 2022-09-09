@@ -82,78 +82,85 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
           IconButton(icon: Icon(Icons.logout), onPressed: () => logOut(context))
         ],
       ),
-      body: isLoading
-          ? Center(
-              child: Container(
-                height: size.height / 20,
-                width: size.height / 20,
-                child: CircularProgressIndicator(),
-              ),
-            )
-          : Column(
-              children: [
-                SizedBox(
-                  height: size.height / 20,
-                ),
-                Container(
-                  height: size.height / 14,
-                  width: size.width,
-                  alignment: Alignment.center,
+      body: Container(
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/astro.jpg"),
+                  fit: BoxFit.cover)),
+          child: isLoading
+              ? Center(
                   child: Container(
-                    height: size.height / 14,
-                    width: size.width / 1.15,
-                    child: TextField(
-                      controller: _search,
-                      decoration: InputDecoration(
-                        hintText: "Search",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
+                    height: size.height / 20,
+                    width: size.height / 20,
+                    child: CircularProgressIndicator(),
+                  ),
+                )
+              : Column(
+                  children: [
+                    SizedBox(
+                      height: size.height / 20,
+                    ),
+                    Container(
+                      height: size.height / 14,
+                      width: size.width,
+                      alignment: Alignment.center,
+                      child: Container(
+                        height: size.height / 14,
+                        width: size.width / 1.15,
+                        child: TextField(
+                          controller: _search,
+                          decoration: InputDecoration(
+                            hintText: "Search",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height / 50,
-                ),
-                ElevatedButton(
-                  onPressed: onSearch,
-                  child: Text("Search"),
-                ),
-                SizedBox(
-                  height: size.height / 30,
-                ),
-                userMap != null
-                    ? ListTile(
-                        onTap: () {
-                          String roomId = chatRoomId(
-                              _auth.currentUser!.displayName!,
-                              userMap!['name']);
+                    SizedBox(
+                      height: size.height / 50,
+                    ),
+                    ElevatedButton(
+                      onPressed: onSearch,
+                      child: Text("Search"),
+                    ),
+                    SizedBox(
+                      height: size.height / 30,
+                    ),
+                    userMap != null
+                        ? ListTile(
+                            onTap: () {
+                              String roomId = chatRoomId(
+                                  _auth.currentUser!.displayName!,
+                                  userMap!['name']);
 
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => ChatRoom(
-                                chatRoomId: roomId,
-                                userMap: userMap!,
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => ChatRoom(
+                                    chatRoomId: roomId,
+                                    userMap: userMap!,
+                                  ),
+                                ),
+                              );
+                            },
+                            leading:
+                                Icon(Icons.account_box, color: Colors.black),
+                            title: Text(
+                              userMap!['name'],
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
-                          );
-                        },
-                        leading: Icon(Icons.account_box, color: Colors.black),
-                        title: Text(
-                          userMap!['name'],
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        subtitle: Text(userMap!['email']),
-                        trailing: Icon(Icons.chat, color: Colors.black),
-                      )
-                    : Container(),
-              ],
-            ),
+                            subtitle: Text(userMap!['email']),
+                            trailing: Icon(Icons.chat, color: Colors.black),
+                          )
+                        : Container(),
+                  ],
+                )),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.group),
         onPressed: () => Navigator.of(context).push(

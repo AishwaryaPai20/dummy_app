@@ -19,7 +19,12 @@ class _CreateAccountState extends State<CreateAccount> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: isLoading
+        body: Container(
+      alignment: Alignment.center,
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/astro.jpg"), fit: BoxFit.cover)),
+      child: isLoading
           ? Center(
               child: Container(
                 height: size.height / 20,
@@ -37,29 +42,42 @@ class _CreateAccountState extends State<CreateAccount> {
                     alignment: Alignment.centerLeft,
                     width: size.width / 0.5,
                     child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios), onPressed: () {}),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {}),
                   ),
                   SizedBox(
-                    height: size.height / 50,
+                    height: 80,
                   ),
                   Container(
                     width: size.width / 1.1,
-                    child: Text(
-                      "Welcome",
-                      style: TextStyle(
-                        fontSize: 34,
-                        fontWeight: FontWeight.bold,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 120),
+                      child: Text(
+                        "Welcome",
+                        style: TextStyle(
+                          fontSize: 34,
+                          fontFamily: 'Baloo',
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
                   Container(
                     width: size.width / 1.1,
-                    child: Text(
-                      "Create Account to Contiue!",
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 40),
+                      child: Text(
+                        "Create Account to Continue",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 176, 166, 166),
+                          fontSize: 25,
+                          fontFamily: 'Baloo',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
@@ -98,17 +116,21 @@ class _CreateAccountState extends State<CreateAccount> {
                       child: Text(
                         "Login",
                         style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 16,
+                          color: Colors.white,
+                          fontSize: 19,
+                          fontFamily: 'Baloo',
                           fontWeight: FontWeight.w500,
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 200,
                   )
                 ],
               ),
             ),
-    );
+    ));
   }
 
   Widget customButton(Size size) {
@@ -145,14 +167,15 @@ class _CreateAccountState extends State<CreateAccount> {
           width: size.width / 1.2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.blue,
+            color: Color.fromARGB(255, 3, 20, 75),
           ),
           alignment: Alignment.center,
           child: Text(
             "Create Account",
             style: TextStyle(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: 22,
+              fontFamily: 'Baloo',
               fontWeight: FontWeight.bold,
             ),
           )),
@@ -167,13 +190,19 @@ class _CreateAccountState extends State<CreateAccount> {
       child: TextField(
         controller: cont,
         decoration: InputDecoration(
-          prefixIcon: Icon(icon),
-          hintText: hintText,
-          hintStyle: TextStyle(color: Colors.grey),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
+          prefixIcon: Icon(
+            icon,
+            color: Colors.white,
           ),
+          hintText: hintText,
+          hintStyle: TextStyle(
+              color: Color.fromARGB(255, 205, 200, 200),
+              fontWeight: FontWeight.bold),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(color: Colors.white)),
         ),
+        style: TextStyle(color: Colors.white),
       ),
     );
   }
